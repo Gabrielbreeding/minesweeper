@@ -11,38 +11,32 @@ revealed = [["a", 'b', 'c'],
 print("field =", field)
 print("field[1] =", field[1])
 
-row1 = field[0]
-row2 = field[1]
+newlist = field
 
 
-
-
-def interact():
-    print("1.", row1) 
-    print("2.", row2)    
-    
+def main():
+    print("        ")
+    print("        ")
     reveal = input("select which row to reveal: ")
-    reveal = float(reveal)    
-    
-    if reveal == 1 and row1 == revealed[0] or reveal == 2 and row2 == revealed[1]:
-        print("already revealed")
-    
-    elif reveal == 2 and row2 == true:
-        print("already revealed")
+    reveal = float(reveal)
 
-    elif reveal == 1 and row2 == true or reveal == 2 and row1 == true:
-    
-        print("1.", revealed[0])
-        print("2.", revealed[1])
+    if newlist == revealed:
+        print("all is revealed")
 
     elif reveal == 1:
-        row1 = revealed[0]
-        print("1.", row1)
-        print("2.", row2)
-    
-    
+        if newlist[0] == revealed[0]:
+            print("already revealed")
+        else:
+            newlist[0] = revealed[0]
+            print("1.", newlist[0])
+            print("2.", newlist[1])
+
     elif reveal == 2:
-        print("1.", field[0])
-        print("2.", revealed[1])
-        row2 == true
-interact()    
+        if newlist[1] == revealed[1]:
+            print("already revealed")
+        else:
+            newlist[1] = revealed[1]
+            print("1.", newlist[0])
+            print("2.", newlist[1])
+    main()
+main()
