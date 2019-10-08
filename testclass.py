@@ -4,3 +4,5 @@ class Tile:
 	def __init__(self, mine, empty):
             self.mine = mine
             self.empty = empty
+print ("class is 'Tile'")
+print (str(Tile.mine))
