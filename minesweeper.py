@@ -79,15 +79,18 @@ def main():
 #if everything is revealed, activate this.
     if newlist == revealed:
         print("all is revealed")
+        print("thanks for playing!")
+        sys.exit()
     elif newlist[revrow][revcol] == revealed[revrow][revcol]:
         print("Sorry! That is already revealed!")
         main()
     else:
         newlist[revrow][revcol] = revealed[revrow][revcol]
         hold()
-#for i in range(4):
-#    print("   ", i+1,  ".  ", newlist[i][0], " | ", newlist[i][1], " | ", newlist[i][2])
-#    print("        -----------------")
+for i in range(5):
+    print("   ", i+1,  ".  ", newlist[i][0], " | ", newlist[i][1], " | ", newlist[i][2])
+    if i < 4:
+        print("        -----------------")
 hold()
 #loops the program
 main()
