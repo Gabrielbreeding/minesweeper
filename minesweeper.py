@@ -34,12 +34,52 @@ c = 0
 cc = 0
 for box in revealed:
     for boxes in revealed[c]:
-        if c > 0 and c < 4:
+        if c == 0:
             if cc > 0 and cc < 4:
-                top = revealed[c-1][:].count('M')
-                middle = revealed[c].count('M')
-                bottom = revealed[c+1].count('M')
+                middle = revealed[c][cc-2:3].count('M')
+                bottom = revealed[c+1][cc-2:3].count('M')
+                tM = (middle + bottom) 
+            elif cc == 0:
+                middle = revealed[c][:2].count('M')
+                bottom = revealed[c+1][:2].count('M')
+                tM = (middle + bottom)  
+            elif cc == 4:
+                middle = revealed[c][cc-2:3].count('M')
+                bottom = revealed[c+1][cc-2:3].count('M')
+                tM = (middle + bottom)
+        elif c == 4:
+            if cc > 0 and cc < 4:
+                top = revealed[c-1][cc-2:3].count('M')
+                middle = revealed[c][cc-2:3].count('M')
+                tM = (top + middle)
+            elif cc == 0:
+                top = revealed[c-1][:2].count('M')
+                middle = revealed[c][:2].count('M')
+                tM = (top + middle)
+            elif cc > 0 and cc < 4:
+                top = revealed[c-1][3:].count('M')
+                middle = revealed[c][3:].count('M')
+                tM = (top + middle)                
+        elif c > 0 and c < 4:
+            if cc > 0 and cc < 4:
+                top = revealed[c-1][cc-2:3].count('M')
+                middle = revealed[c][cc-2:3].count('M')
+                bottom = revealed[c+1][cc-2:3].count('M')
                 tM = (top + middle + bottom)
+            elif cc == 0:
+                top = revealed[c-1][:2].count('M')
+                middle = revealed[c][:2].count('M')
+                bottom = revealed[c+1][:2].count('M')
+                tM = (top + middle + bottom)
+            elif cc == 4:
+                top = revealed[c-1][3:].count('M')
+                middle = revealed[c][3:].count('M')
+                bottom = revealed[c+1][3:].count('M')
+                tM = (top + middle + bottom)
+        revealed[c][cc] = tM 
+        cc += 1
+c += 1
+            
 
 #tuple for what can be typed in input.
 selrow = ('1', '2', '3', '4', '5')
