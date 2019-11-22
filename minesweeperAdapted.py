@@ -231,8 +231,7 @@ def hold():
     print("    4.  ", newlist[3][0], "|", newlist[3][1], "|" , newlist[3][2], "|", newlist[3][3], "|", newlist[3][4]) 
     print("        --------------------")                                              
     print("    5.  ", newlist[4][0], "|", newlist[4][1], "|" , newlist[4][2], "|", newlist[4][3], "|", newlist[4][4]) 
-    main()
-    
+
 #makes the main program code for interacting with newlist.
 def main():
 #user inputs which row and collumn to reveal
@@ -265,5 +264,3 @@ def main():
         reveal(revrow, revcol, "R")
     else:
         reveal(revrow, revcol, "F")
-hold()
-main()
