@@ -8,7 +8,14 @@
 import sys
 import random as r
 
+
 def makefield(field):
+    '''
+    A function to make the first 2 screens, the one the player sees, and the one the player sees after revealing.
+    
+    depending on the field (1 or 2),
+    the function will return either the player's screen(1) or the revealed screen(2). 
+    '''
     if field == 1:
         return [['#' , '#' , '#', '#', '#'],
                  ['#' , '#' , '#', '#', '#'],
@@ -26,6 +33,15 @@ field = makefield(1)
 revealed = makefield(2)
 
 def placebomb():
+    '''
+    A function to place mines in the revealed field.
+    
+    The function continues until there are 4 bombs in the revealed field
+    and selects a random x and y coordinate,
+    the nested while loop checks to see if there is already a mine there,
+    if there is, it selects a new random coordinate and repeats until it gets
+    a new coordinate without a mine.
+    '''
     #places the bombs
     bombs = 0
     while bombs < 4:
@@ -39,6 +55,28 @@ def placebomb():
 placebomb()
 
 def placenums():
+    '''
+    A function that places the numbers you see in the program.
+    
+    The Function places the numbers depending on the amount of mines in it's detection radius.
+    
+    depending on the row and column,
+    it will select different parts of the rows around it,
+    and count the mines that it sees.
+    
+    visual:
+    x is the coordinate.
+    # is whats being detected.
+    - is whats not being detected. 
+    
+        x|#|-       -|#|x       -|#|#       -|-|-       #|#|#
+        #|#|-       -|#|#       -|#|x       #|#|-       #|x|#
+        -|-|-       -|-|-       -|#|#       x|#|-       #|#|#
+        
+        #|x|#       -|-|-       -|-|-       #|#|-
+        #|#|#       -|#|#       #|#|#       x|#|-
+        -|-|-       -|#|x       #|x|#       #|#|-
+    '''
     c = 0
     cc = 0
     for box in (revealed):
@@ -75,7 +113,7 @@ def placenums():
                         tM = (middle + bottom)
                 elif c == 4:
                     if cc == 1:
-                        top = revealed[c-1][:3].count('M')
+                        top = revealed[c-1][:3].count('M') # | # |
                         middle = revealed[c][:3].count('M')
                         tM = (top + middle)
                     elif cc == 0:
@@ -123,11 +161,32 @@ def placenums():
                 revealed[c][cc] = tM    
             cc += 1
         c += 1
+        '''
+        
+        '''
 placenums()
 
 def getrow(version):
+    '''
+    A function that obtains a row number from the user.
+    
+    getrow(version)
+    
+    Versions are "R" or "F"
+    
+    Version "R" (For Revealing):
+    the user can input the word "flag" to switch to version "F",
+    the program will ask the user to pick a row to reveal from.
+    
+    Version "F" (For Flagging):
+    the user can input the word "back" to switch back to version "R"
+    the program will ask the user to pick a row to flag.
+    
+    if ever the user decides they want to quit the game, they can type "exit",
+    and the program will end. if the user types a row that's out of range, 
+    the program will give an error and have the user try again.
+    '''
     if version == "R":
-        place_flag = False
         print("        ")
         print("        ")
         print("Enter 'exit' to leave program")
@@ -142,11 +201,10 @@ def getrow(version):
             print("        ")
             print("        ")
             print("ERROR:  Please enter a valid number.")
-            hold()
+            screen()
             return getrow("R")
         return revrow
     if version == "F":
-        place_flag = True
         print("        ")
         print("        ")
         print("Enter 'exit' to leave program")
@@ -161,13 +219,20 @@ def getrow(version):
             print("        ")
             print("        ")
             print("ERROR:  Please enter a valid number.")
-            hold()
+            screen()
             return getrow("F")
         return revrow
 
 def getcollumn(version):
+    '''
+    A Function that gets a column from the user.
+    
+    
+    getcollumn(version)
+    
+    version "R"
+    '''
     if version == "R":
-        place_flag = False
         print("        ")
         print("        ")
         print("Enter 'exit' to leave program")
@@ -179,11 +244,10 @@ def getcollumn(version):
             print("        ")
             print("        ")
             print("ERROR:  Please enter a valid number.")
-            hold()
+            screen()
             return getcollumn("R")
         return revcol
     if version == "F":
-        place_flag = True
         print("        ")
         print("        ")
         print("Enter 'exit' to leave program")
@@ -195,30 +259,60 @@ def getcollumn(version):
             print("        ")
             print("        ")
             print("ERROR:  Please enter a valid number.")
-            hold()
+            screen()
             return getcollumn("F")
         return revcol
 
 
 def reveal(row, collumn, version):
+    '''
+    A function that picks out the position the player called, and changes it.
+    
+    reveal(row, collumn, version)
+    
+    rows are 1-5
+    collumns are 1-5
+    version is "R" or "F"
+    
+    version "R"
+        tells function that this is "Regular", 
+        and it's just replacing things with numbers
+        
+    version "F"
+        tells function that the user wants to place a flag,
+        so the function will replace the coordinate with a "F"
+        meaning that the coordinate is "Flagged"
+        
+    if a coordinate is already revealed or is "Flagged",
+    then it will not reveal it.
+    '''
     if newlist[row][collumn] == revealed[row][collumn]:
         print("Sorry! That is already revealed!")
-        hold()
+        screen()
         main()
-    if version == "R":
+    if newlist[row][collumn] == "F" and version == "R":
+        print("Sorry! That's flagged!")
+    elif newlist[row][collumn] == "F" and version == "F":
+        newlist[row][collumn] == "#"
+    elif version == "R":
         newlist[row][collumn] = revealed[row][collumn]
-        hold() 
-    if version == "F":
+        screen() 
+    elif version == "F":
         newlist[row][collumn] = "F"
-        hold()
+        screen()
 #tuple for what can be typed in input.
 selrow = ('1', '2', '3', '4', '5')
 selcol = ('1', '2', '3', '4', '5')
 #makes newlist variable for the reason of being manipulated.
 newlist = field
 
-# holds the current field
-def hold():
+# screens the current field
+def screen():
+    '''
+    A function that prints out the screen that the player can see.
+    
+    it selects points from the matrix one at a time and prints them, putting |s in the middle of them.
+    '''
     print("            columns       ")                                          
     print("    ")                                                                 
     print("         1.  2.  3.  4.  5.   ")                                          
@@ -234,36 +328,40 @@ def hold():
     main()
     
 #makes the main program code for interacting with newlist.
-def main():
-#user inputs which row and collumn to reveal
-    totalfield = field[0] + field[1] + field[2] + field[3] + field[4]
-    if totalfield.count('M') > 0:
-        print("Uh oh! You Blew Up!")
-        sys.exit()
-    revrow = getrow("R")
-    if revrow == "F":
-        revrow = getrow("F")
-        flag = True
-    else:
-        flag = False
-    if flag:
-        revcol = getcollumn("F")
-    elif not flag:
-        revcol = getcollumn("R")
-    revrow = int(revrow)-1
-    revcol = int(revcol)-1
-    mines_left = 0
-    
-    for i in range(len(field)):
-        for collumns in field[i]:
-            if collumns == '#' or collumns == 'F':
-                mines_left += 1
-    if mines_left == 4:
-        print("Horray! You Won!")
-        sys.exit()
-    if not flag:
-        reveal(revrow, revcol, "R")
-    else:
-        reveal(revrow, revcol, "F")
-hold()
-main()
+if __name__ == "__main__":
+    def main():
+    #user inputs which row and collumn to reveal
+        totalfield = field[0] + field[1] + field[2] + field[3] + field[4]
+        if totalfield.count('M') > 0:
+            print("Uh oh! You Blew Up!")
+            sys.exit()
+        revrow = getrow("R")
+        if revrow == "F":
+            revrow = getrow("F")
+            flag = True
+        else:
+            flag = False
+        if flag:
+            revcol = getcollumn("F")
+        elif not flag:
+            revcol = getcollumn("R")
+        revrow = int(revrow)-1
+        revcol = int(revcol)-1
+        mines_left = 0
+        
+       
+        if not flag:
+            reveal(revrow, revcol, "R")
+        else:
+            reveal(revrow, revcol, "F")
+        for i in range(len(field)):
+            for collumns in field[i]:
+                if collumns == '#' or collumns == 'F':
+                    mines_left += 1
+        if mines_left == 4:
+            print("Horray! You Won!")
+            sys.exit()            
+    screen()
+    main()
+
+
