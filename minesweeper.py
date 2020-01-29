@@ -31,8 +31,8 @@ def makefield(field):
 
 field = makefield(1)
 revealed = makefield(2)
-
-def placebomb():
+maxbomb = 5
+def placebomb(maxbomb):
     '''
     A function to place mines in the revealed field.
     
@@ -44,7 +44,8 @@ def placebomb():
     '''
     #places the bombs
     bombs = 0
-    while bombs < 4:
+    maxbomb = 5
+    while bombs < maxbomb:
         x = r.randint(0, 4)
         y = r.randint(0, 4)
         while revealed[y][x] == 'M':
@@ -52,7 +53,7 @@ def placebomb():
             y = r.randint(0,4)
         revealed[y][x] = 'M'
         bombs += 1
-placebomb()
+placebomb(maxbomb)
 
 def placenums():
     '''
@@ -289,11 +290,11 @@ def reveal(row, collumn, version):
     if newlist[row][collumn] == revealed[row][collumn]:
         print("Sorry! That is already revealed!")
         screen()
-        main()
     if newlist[row][collumn] == "F" and version == "R":
         print("Sorry! That's flagged!")
     elif newlist[row][collumn] == "F" and version == "F":
         newlist[row][collumn] == "#"
+        screen()
     elif version == "R":
         newlist[row][collumn] = revealed[row][collumn]
         screen() 
@@ -325,11 +326,11 @@ def screen():
     print("    4.  ", newlist[3][0], "|", newlist[3][1], "|" , newlist[3][2], "|", newlist[3][3], "|", newlist[3][4]) 
     print("        --------------------")                                              
     print("    5.  ", newlist[4][0], "|", newlist[4][1], "|" , newlist[4][2], "|", newlist[4][3], "|", newlist[4][4]) 
-    main()
+    main(maxbomb)
     
 #makes the main program code for interacting with newlist.
 if __name__ == "__main__":
-    def main():
+    def main(maxbomb):
     #user inputs which row and collumn to reveal
         totalfield = field[0] + field[1] + field[2] + field[3] + field[4]
         if totalfield.count('M') > 0:
@@ -358,10 +359,10 @@ if __name__ == "__main__":
             for collumns in field[i]:
                 if collumns == '#' or collumns == 'F':
                     mines_left += 1
-        if mines_left == 4:
+        if mines_left == maxbomb:
             print("Horray! You Won!")
             sys.exit()            
     screen()
-    main()
+    main(maxbomb)
 
 

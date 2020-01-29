@@ -38,6 +38,23 @@ def placebomb():
         bombs += 1
 placebomb()
 
+def getnum(number):
+    '''
+    This function will find the specified number on the screen and add them to a dictionary.
+    
+    for loop and nested for loop to look through every point.
+    when selected point is the specified number it will add it to the dictionary with 2 definitions, row and column.
+    '''
+    
+    numbers = {}
+    num = 0
+    for row in range(newlist):
+        for column in range(newlist[row]):
+            if newlist[row][column] == number:
+                num += 1
+                numbers[str(num)] = (row, column)
+    
+    return numbers 
 def placenums():
     c = 0
     cc = 0
@@ -216,6 +233,14 @@ selrow = ('1', '2', '3', '4', '5')
 selcol = ('1', '2', '3', '4', '5')
 #makes newlist variable for the reason of being manipulated.
 newlist = field
+
+def getzero():
+    '''
+    this function is to find the coordinates to 
+    '''
+    for row in newlist:
+        for column in newlist[row]:
+            if column = 0
 
 # holds the current field
 def hold():

@@ -4,7 +4,7 @@
 
 import minesweeperAdapted as ms
 
-z = 0
+z = []
 
 def rr(x, y):
     '''
@@ -66,7 +66,6 @@ ms.hold()
 ms.reveal(0, 0, "R")
 ms.hold
 
-
-
+#second, if it's zero, reveal the area around it.
 if coordinate[0][0] == 0:
     rr(0, 0)
