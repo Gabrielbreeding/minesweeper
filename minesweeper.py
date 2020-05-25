@@ -289,18 +289,19 @@ def reveal(row, collumn, version):
     '''
     if newlist[row][collumn] == revealed[row][collumn]:
         print("Sorry! That is already revealed!")
-        screen()
+        
     if newlist[row][collumn] == "F" and version == "R":
         print("Sorry! That's flagged!")
+        
     elif newlist[row][collumn] == "F" and version == "F":
         newlist[row][collumn] == "#"
-        screen()
+        
     elif version == "R":
         newlist[row][collumn] = revealed[row][collumn]
-        screen() 
+        
     elif version == "F":
         newlist[row][collumn] = "F"
-        screen()
+    screen()
 #tuple for what can be typed in input.
 selrow = ('1', '2', '3', '4', '5')
 selcol = ('1', '2', '3', '4', '5')
@@ -330,11 +331,11 @@ def get_row(y):
             row += "|" + newlist[y][i] 
     return row
     
-def screen():
+def screen():    
     '''
     A function that prints out the screen that the player can see.
     
-    it selects points from the matrix one at a time and prints them, putting |s in the middle of them.
+    it selects points from the matrix one at a time and prints them, putting |s in the middle of them.   
     '''
     columns = "       "
     divider = "       "
