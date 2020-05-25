@@ -2,7 +2,7 @@
 #GabrielBreeding
 #11/22/19
 
-import minesweeperAdapted as ms
+import minesweeper as ms
 
 z = []
 
@@ -60,11 +60,11 @@ def rr(x, y):
             z
 
 coordinate = ms.newlist
-ms.hold()
+ms.screen()
 
 #first, reveal something.
 ms.reveal(0, 0, "R")
-ms.hold
+ms.screen
 
 #second, if it's zero, reveal the area around it.
 if coordinate[0][0] == 0:
