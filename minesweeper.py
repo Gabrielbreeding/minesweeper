@@ -114,7 +114,7 @@ def placenums():
                         tM = (middle + bottom)
                 elif c == 4:
                     if cc == 1:
-                        top = revealed[c-1][:3].count('M') # | # |
+                        top = revealed[c-1][:3].count('M')
                         middle = revealed[c][:3].count('M')
                         tM = (top + middle)
                     elif cc == 0:
@@ -308,25 +308,46 @@ selcol = ('1', '2', '3', '4', '5')
 newlist = field
 
 # screens the current field
+def get_row(y):
+    '''
+    A function that will get a full specified row.
+    '''
+    if y == 0:
+        row = "  r  " + str(y + 1) + " "
+    elif y == 1:
+        row = "  o  " + str(y + 1) + " "
+    elif y == 2:
+        row = "  w  " + str(y + 1) + " "
+    elif y == 3:
+        row = "  s  " + str(y + 1) + " "   
+    else:
+        row = "     " + str(y + 1) + " "  
+        
+    for i in range(len(newlist[y])):
+        if i == 0:
+            row += newlist[y][0]
+        else:
+            row += "|" + newlist[y][i] 
+    return row
+    
 def screen():
     '''
     A function that prints out the screen that the player can see.
     
     it selects points from the matrix one at a time and prints them, putting |s in the middle of them.
     '''
-    print("            columns       ")                                          
-    print("    ")                                                                 
-    print("         1.  2.  3.  4.  5.   ")                                          
-    print("    1.  ", newlist[0][0], "|", newlist[0][1], "|", newlist[0][2], "|", newlist[0][3], "|", newlist[0][4])  
-    print("        --------------------")                   
-    print(" r  2.  ", newlist[1][0], "|", newlist[1][1], "|", newlist[1][2], "|", newlist[1][3], "|", newlist[1][4])  
-    print(" o      --------------------")                                              
-    print(" w  3.  ", newlist[2][0], "|", newlist[2][1], "|" , newlist[2][2], "|", newlist[2][3], "|", newlist[2][4]) 
-    print(" s      --------------------")                                              
-    print("    4.  ", newlist[3][0], "|", newlist[3][1], "|" , newlist[3][2], "|", newlist[3][3], "|", newlist[3][4]) 
-    print("        --------------------")                                              
-    print("    5.  ", newlist[4][0], "|", newlist[4][1], "|" , newlist[4][2], "|", newlist[4][3], "|", newlist[4][4]) 
-    main(maxbomb)
+    columns = "       "
+    divider = "       "
+    for i in range(len(newlist[0])): 
+        columns += str(i+1) + " "
+        divider += "--"    
+        
+    print("        columns       ")                                          
+    print("    ")
+    print(columns)
+    for i in range(len(newlist)):
+        print(get_row(i))
+
     
 #makes the main program code for interacting with newlist.
 if __name__ == "__main__":
