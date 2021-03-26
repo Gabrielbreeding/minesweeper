@@ -1,0 +1,7 @@
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\bin\Debug\minesweeper.exe.config
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\bin\Debug\minesweeper.exe
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\bin\Debug\minesweeper.pdb
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\obj\Debug\MinesweeperConsole.csprojAssemblyReference.cache
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\obj\Debug\MinesweeperConsole.csproj.CoreCompileInputs.cache
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\obj\Debug\minesweeper.exe
+C:\Users\breed\Desktop\AWD Semester Two\minesweeper\minesweeper\obj\Debug\minesweeper.pdb
